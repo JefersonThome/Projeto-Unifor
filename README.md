@@ -1,14 +1,16 @@
-# ENADE 2023 — Desafio de Analista de Dados Pleno
+# Desafio Técnico de Analista de Dados Pleno
 
-Pipeline analítico dos Microdados do ENADE 2023 usando Python, DuckDB,
+Pipeline de processamento de Microdados do ENADE 2023 usando Python, DuckDB,
 Parquet, Streamlit e Docker Compose.
 
-## Estado atual
+## Execução
 
-O pipeline ingere os 32 arquivos, preserva os TXT na Bronze, cria 32 arquivos
-Parquet tipados na Silver e produz uma Gold agregada por curso.
+O pipeline ingere os 32 arquivos na camada Bronze, cria 32 arquivos
+Parquet tipados e tratados na Silver e produz uma Gold agregada por curso.
 
 ## Como executar
+
+Execute o arquivo .bat "Iniciar"
 
 ```bash
 docker compose up --build
@@ -41,28 +43,35 @@ mediana e desvio-padrão por curso.
 
 ## Respostas às perguntas de negócio
 
-### Q1 — A Unifor está no ENADE 2023?
+## Q1 — A Unifor está no ENADE 2023?
 
-Sim. Seu código no Cadastro e-MEC é **555**. A base contém **17 cursos/áreas**
-da Unifor, todos presenciais, e 1.235 notas válidas. As áreas estão disponíveis
-na consulta `sql/q1_unifor.sql` e no dashboard.
+A Universidade de Fortaleza está presente no ENADE 2023, código e-MEC
+**555**. Foram identificados **17 cursos**, em **17 áreas**, todos presenciais.
 
-### Q2 — Presencial x EaD
+## Q2 — Presencial x EaD
 
-A média nacional ponderada pelos estudantes é **49,73 no Presencial** e
-**38,90 no EaD**, diferença de 10,83 pontos. A consulta usa somente `NT_GER`
-válida e apresenta também mediana, desvio-padrão e tamanho das amostras.
+| Modalidade | Média NT_GER |
+|---|---:|---:|---:|---:|
+| EaD | 38,90 |
+| Presencial | 49,73 |
 
-### Q3 — Top 10 da Unifor
+A diferença observada é de **10,83 pontos** a favor da modalidade presencial.
 
-Medicina lidera com média **68,89**, seguida por Enfermagem (**60,98**) e
-Arquitetura e Urbanismo (**58,92**). O resultado sustenta parcialmente a
-expectativa de melhor desempenho dos cursos tradicionais de saúde: oito das
-dez primeiras áreas estão ligadas à saúde, embora Arquitetura apareça em terceiro.
+## Q3 — Top 10 cursos/áreas da Unifor
 
-As consultas estão em `sql/`. A comparação Presencial x EaD apresenta a média
-ponderada pela quantidade de estudantes e também a média simples entre cursos,
-evitando esconder o efeito do tamanho de cada curso.
+| Pos. | CO_CURSO | Área | Média NT_GER | Notas válidas |
+|---:|---:|---|---:|---:|
+| 1 | 93001 | Medicina | 68,89 | 196 |
+| 2 | 11719 | Enfermagem | 60,98 | 57 |
+| 3 | 18324 | Arquitetura e Urbanismo | 58,92 | 144 |
+| 4 | 11718 | Fisioterapia | 57,74 | 52 |
+| 5 | 18325 | Farmácia | 54,19 | 42 |
+| 6 | 11731 | Odontologia | 52,95 | 149 |
+| 7 | 1315325 | Tecnologia em Estética e Cosmética | 51,94 | 23 |
+| 8 | 56630 | Nutrição | 51,85 | 93 |
+| 9 | 1357703 | Medicina Veterinária | 51,30 | 92 |
+| 10 | 107686 | Engenharia Ambiental | 51,07 | 16 |
+
 
 ## Limitações conhecidas
 
