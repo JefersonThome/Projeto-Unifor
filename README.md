@@ -51,7 +51,7 @@ A Universidade de Fortaleza está presente no ENADE 2023, código e-MEC
 ## Q2 — Presencial x EaD
 
 | Modalidade | Média NT_GER |
-|---|---:|---:|---:|---:|
+|---|---:|
 | EaD | 38,90 |
 | Presencial | 49,73 |
 
