@@ -1,0 +1,19 @@
+services:
+  pipeline:
+    build: .
+    volumes:
+      - ./source_data:/app/source_data
+      - ./data:/app/data
+    command: python -m src.pipeline
+
+  dashboard:
+    build: .
+    volumes:
+      - ./data:/app/data
+    ports:
+      - "8501:8501"
+    command: streamlit run dashboard/app.py --server.address=0.0.0.0
+    depends_on:
+      pipeline:
+        condition: service_completed_successfully
+
